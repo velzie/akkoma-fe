@@ -22,7 +22,7 @@ export const multiChoiceProperties = [
 
 export const defaultState = {
   profile: 'default',
-  profileVersion: 0,
+  profileVersion: 0, // internal fe copy of server-side version
   expertLevel: 0, // used to track which settings to show and hide
   colors: {},
   theme: undefined,
@@ -127,6 +127,21 @@ export const instanceDefaultProperties = Object.entries(defaultState)
   .filter(([key, value]) => value === undefined)
   .map(([key, value]) => key)
 
+function updateLocalSettings(store, settingEntries, version = null) {
+  if (version == null)
+    version = store.state.profileVersion
+
+  settingEntries.forEach(([name, value]) => {
+    if (store.state[name] !== value) {
+      store.dispatch('setOption', { name, value })
+    }
+  })
+
+  // Set this at the end to override any potentially stored profileVersion
+  store.commit('setOption', { name: 'profileVersion', value: version })
+}
+
+
 const config = {
   state: { ...defaultState },
   getters: {
@@ -198,19 +213,17 @@ const config = {
         store.dispatch('listSettingsProfiles')
       })
     },
-    loadSettings ({ dispatch }, data) {
+    loadSettings (store, data) {
       const knownKeys = new Set(Object.keys(defaultState))
-      const presentKeys = new Set(Object.keys(data))
-      const intersection = new Set()
-      for (let elem of presentKeys) {
-        if (knownKeys.has(elem)) {
-          intersection.add(elem)
-        }
-      }
 
-      intersection.forEach(
-        name => dispatch('setOption', { name, value: data[name] })
-      )
+      // Limit to supported properties
+      const newSettingEntries =
+         Object.entries(data)
+        .filter(([key, value]) => knownKeys.has(key))
+
+      // disregard stored profileVersion; sync afterwards increases previous version
+      updateLocalSettings(store, newSettingEntries, null)
+      store.dispatch('syncSettings')
     },
     setHighlight ({ commit, dispatch }, { user, color, type }) {
       commit('setHighlight', { user, color, type })
@@ -244,12 +257,7 @@ const config = {
         .then(({ settings, version }) => {
           console.log('found settings version', version)
           if (forceUpdate || (version > store.state.profileVersion)) {
-            store.commit('setOption', { name: 'profileVersion', value: version })
-            Object.entries(settings).forEach(([name, value]) => {
-              if (store.state[name] !== value) {
-                store.dispatch('setOption', { name, value })
-              }
-            })
+            updateLocalSettings(store, Object.entries(settings), version)
           } else {
             console.log('settings are up to date')
           }
