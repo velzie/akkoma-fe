@@ -20,6 +20,8 @@ To use Akkoma-FE in Akkoma, use the [frontend](https://docs.akkoma.dev/stable/ad
 
 ## Build Setup
 
+Make sure you have [Node.js](https://nodejs.org/) installed. You can check `/.woodpecker.yml` for which node version the Akkoma CI currently uses.
+
 ``` bash
 # install dependencies
 corepack enable
