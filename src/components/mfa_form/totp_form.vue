@@ -18,6 +18,7 @@
           <input
             id="code"
             v-model="code"
+            autocomplete="one-time-code"
             class="form-control"
           >
         </div>
