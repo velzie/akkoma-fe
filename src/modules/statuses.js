@@ -337,7 +337,6 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       return
     }
 
-    console.log(notification)
     if (isStatusNotification(notification.type)) {
       notification.action = addStatusToGlobalStorage(state, notification.action).item
       notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
