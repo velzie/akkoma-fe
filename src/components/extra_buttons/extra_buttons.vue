@@ -10,6 +10,17 @@
     <template #content="{close}">
       <div class="dropdown-menu">
         <button
+          v-if="!ownStatus"
+          class="button-default dropdown-item dropdown-item-icon"
+          @click.prevent="biteNote"
+          @click="close"
+        >
+          <FAIcon
+            fixed-width
+            icon="tooth"
+          /><span>{{ $t("status.bite_note") }}</span>
+        </button>
+        <button
           v-if="canMute && !status.thread_muted"
           class="button-default dropdown-item dropdown-item-icon"
           @click.prevent="muteConversation"

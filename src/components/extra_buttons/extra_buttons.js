@@ -9,7 +9,8 @@ import {
   faShareAlt,
   faExternalLinkAlt,
   faHistory,
-  faFilePen
+  faFilePen,
+  faTooth
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faBookmark as faBookmarkReg,
@@ -27,7 +28,8 @@ library.add(
   faExternalLinkAlt,
   faFlag,
   faHistory,
-  faFilePen
+  faFilePen,
+  faTooth
 )
 
 const ExtraButtons = {
@@ -163,6 +165,9 @@ const ExtraButtons = {
     },
     hideRedraftStatusConfirmDialog () {
       this.showingRedraftDialog = false
+    },
+    biteNote () {
+      this.$store.dispatch('biteNote', this.status.id)
     }
   },
   computed: {

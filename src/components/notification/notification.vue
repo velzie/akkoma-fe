@@ -102,6 +102,14 @@
               {{ ' ' }}
               <small>{{ $t('notifications.follow_request') }}</small>
             </span>
+            <span v-if="notification.type === 'bite'">
+              <FAIcon
+                class="type-icon"
+                icon="tooth"
+              />
+              {{ ' ' }}
+              <small>{{ $t('notifications.bit') }}</small>
+            </span>
             <span v-if="notification.type === 'move'">
               <FAIcon
                 class="type-icon"
@@ -216,6 +224,14 @@
         </div>
         <div
           v-else-if="notification.type === 'move'"
+          class="move-text"
+        >
+          <router-link :to="targetUserProfileLink">
+            @{{ notification.target.screen_name_ui }}
+          </router-link>
+        </div>
+        <div
+          v-else-if="notification.type === 'bite'"
           class="move-text"
         >
           <router-link :to="targetUserProfileLink">

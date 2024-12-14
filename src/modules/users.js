@@ -54,6 +54,10 @@ const unblockUser = (store, id) => {
     .then((relationship) => store.commit('updateUserRelationship', [relationship]))
 }
 
+const biteUser = (store, id) => {
+  return store.rootState.api.backendInteractor.biteUser({ id })
+}
+
 const removeUserFromFollowers = (store, id) => {
   return store.rootState.api.backendInteractor.removeUserFromFollowers({ id })
     .then((relationship) => store.commit('updateUserRelationship', [relationship]))
@@ -379,6 +383,9 @@ const users = {
     },
     unblockUsers (store, ids = []) {
       return Promise.all(ids.map(id => unblockUser(store, id)))
+    },
+    biteUser (store, id) {
+      return biteUser(store, id)
     },
     fetchMutes (store, args) {
       const { reset } = args || {}

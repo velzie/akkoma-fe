@@ -15,7 +15,8 @@ export const visibleTypes = store => {
     rootState.config.notificationVisibility.followRequest && 'follow_request',
     rootState.config.notificationVisibility.moves && 'move',
     rootState.config.notificationVisibility.emojiReactions && 'pleroma:emoji_reaction',
-    rootState.config.notificationVisibility.polls && 'poll'
+    rootState.config.notificationVisibility.polls && 'poll',
+    'bite'
   ].filter(_ => _))
 }
 
@@ -101,6 +102,9 @@ export const prepareNotificationObject = (notification, i18n, store) => {
       break
     case 'poll':
       i18nString = 'poll_ended'
+      break
+    case 'bite':
+      i18nString = "bit"
       break
   }
 

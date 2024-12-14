@@ -418,9 +418,13 @@ export const parseNotification = (data) => {
       output.status = isStatusNotification(output.type) ? parseStatus(data.status) : null
       output.action = output.status // TODO: Refactor, this is unneeded
     }
-    output.target = output.type !== 'move'
-      ? null
-      : parseUser(data.target)
+    output.target = null;
+    if (output.type === 'move') {
+      output.target = parseUser(data.target)
+    }
+    if (output.type === 'bite') {
+      output.target = parseUser(data.account)
+    }
     output.from_profile = parseUser(data.account)
     output.emoji = data.emoji
     output.emoji_url = data.emoji_url

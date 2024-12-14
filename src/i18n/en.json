@@ -337,6 +337,7 @@
         "notifications": "Notifications",
         "poll_ended": "poll has ended",
         "reacted_with": "reacted with {0}",
+        "bit": "bit you!",
         "read": "Read!",
         "repeated_you": "repeated your post"
     },
@@ -961,6 +962,7 @@
         "ancestor_follow": "See {numReplies} other reply under this post | See {numReplies} other replies under this post",
         "ancestor_follow_with_icon": "{icon} {text}",
         "attachment_stop_flash": "Stop Flash player",
+        "bite_note": "Bite",
         "bookmark": "Bookmark",
         "collapse_attachments": "Collapse attachments",
         "copy_link": "Copy link to post",
@@ -1124,6 +1126,7 @@
         "approve_confirm_accept_button": "Yes, accept",
         "approve_confirm_cancel_button": "No, cancel",
         "approve_confirm_title": "Approve follow request",
+        "bite": "Bite",
         "block": "Block",
         "block_confirm": "Are you sure you want to block {user}?",
         "block_confirm_accept_button": "Yes, block",

@@ -337,6 +337,7 @@ const addNewNotifications = (state, { dispatch, notifications, older, visibleNot
       return
     }
 
+    console.log(notification)
     if (isStatusNotification(notification.type)) {
       notification.action = addStatusToGlobalStorage(state, notification.action).item
       notification.status = notification.status && addStatusToGlobalStorage(state, notification.status).item
@@ -776,6 +777,9 @@ const statuses = {
     },
     setVirtualHeight ({ commit }, { statusId, height }) {
       commit('setVirtualHeight', { statusId, height })
+    },
+    biteNote (store, id) {
+      return store.rootState.api.backendInteractor.biteNote({ id })
     }
   },
   mutations

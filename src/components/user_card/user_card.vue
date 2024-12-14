@@ -252,6 +252,15 @@
               {{ $t('user_card.mention') }}
             </button>
           </div>
+          <div>
+            <button
+              class="btn button-default btn-block"
+              :disabled="user.deactivated || relationship.blocked_by"
+              @click="biteUser"
+            >
+              {{ $t('user_card.bite') }}
+            </button>
+          </div>
           <ModerationTools
             v-if="loggedIn.role === 'admin'"
             :user="user"

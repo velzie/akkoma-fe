@@ -193,6 +193,9 @@ export default {
     },
     mentionUser () {
       this.$store.dispatch('openPostStatusModal', { replyTo: true, repliedUser: this.user })
+    },
+    biteUser () {
+      return this.$store.dispatch('biteUser', this.user.id)
     }
   }
 }
